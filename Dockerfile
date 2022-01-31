@@ -4,6 +4,6 @@ FROM python:3.10
 WORKDIR /notebook
 # copy all files in the current directory (except those mentioned in dockerignore)
 # to the working directory in the container
-COPY . .
+COPY notebook/ .
 # installing all dependancies packages in the container
 RUN pip install -r requirements.txt
