@@ -31,8 +31,17 @@ song_table_create = """
     );
 """
 
-song_table_create = ("""
-""")
+time_table_create = """
+    CREATE TABLE IF NOT EXISTS time (
+        start_time  TIMESTAMP PRIMARY KEY, 
+        hour        INT, 
+        day         INT, 
+        week        INT, 
+        month       INT, 
+        year        INT, 
+        weekday     INT
+    );
+"""
 
 artist_table_create = ("""
 """)
