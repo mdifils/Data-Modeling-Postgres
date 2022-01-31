@@ -5,6 +5,7 @@
 .dockerignore
 docker-compose.yml
 Dockerfile
+database.env
 README.md
 images/
 # vscode config folder
