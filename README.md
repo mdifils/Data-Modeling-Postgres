@@ -21,3 +21,16 @@ that represents my data model.
 ## Data Model
 
 ![data model](./images/sparkifydb.png)
+
+According to the dataset, there are 4 dimension tables and 1 fact table.
+
+### Dimension tables
+
+- **artists table**: describes the owner the song (name, location, ...)
+- **songs table**: describes the song (title, duration, year, ...)
+- **users table**: describes who is listening to the song
+- **time table**: describes when the song is being played
+
+### Fact table
+
+- **songplays**: 
