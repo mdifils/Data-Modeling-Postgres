@@ -30,7 +30,7 @@ services:
     ports:
       - '8888:8888'
     volumes:
-      - .:/notebook
+      - ./notebook:/notebook
     depends_on:
       # this will handle the communication between the two services. Therefore
       # pgdb will always first run before jlab and we can connect to postgres 
