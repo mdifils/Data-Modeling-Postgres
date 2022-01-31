@@ -11,12 +11,12 @@ perform data analysis:
 ![dataset structure](./images/dataset_structure.png)
 
 For this reason, I'm going to build an ETL pipeline that will transfer data
-from JSON files in seven local directories into a postgres database using python
+from JSON files in those seven directories into a postgres database using python
 and SQL. The data will then be ready for data analysis from Sparkify analytics
-team (Sparkify is a startup who owns the streaming music app). But before 
-writting the ETL pipeline, I'm going to define fact and dimension tables for a 
-star schema. Then I'm going to build an entity relationship diagram that 
-represents my data model.
+team (Sparkify is a startup who owns the streaming music app mentionned above). 
+But before writting the ETL pipeline, I'm going to define fact and dimension 
+tables for a star schema. Then I'm going to build an entity relationship diagram
+that represents my data model.
 
 ## Data Model
 
