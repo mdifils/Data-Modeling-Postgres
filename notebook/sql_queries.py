@@ -8,7 +8,7 @@ artist_table_drop   = "DROP TABLE IF EXISTS artists;"
 
 ##################### CREATE TABLES ###################################
 
-songplay_table_create = """
+artist_table_create = """
     CREATE TABLE IF NOT EXISTS artists (
         artist_id          VARCHAR PRIMARY KEY, 
         artist_name        VARCHAR, 
@@ -18,8 +18,18 @@ songplay_table_create = """
     );
 """
 
-user_table_create = ("""
-""")
+song_table_create = """
+    CREATE TABLE IF NOT EXISTS songs (
+        song_id            VARCHAR PRIMARY KEY, 
+        title              VARCHAR, 
+        artist_id          VARCHAR, 
+        duration           NUMERIC,
+        year               INT
+    -- 	CONSTRAINT fk_songs_artists FOREIGN KEY (artist_id)
+    -- 	REFERENCES artists (artist_id)
+    -- 	ON DELETE CASCADE
+    );
+"""
 
 song_table_create = ("""
 """)
