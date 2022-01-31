@@ -8,8 +8,15 @@ artist_table_drop   = "DROP TABLE IF EXISTS artists;"
 
 ##################### CREATE TABLES ###################################
 
-songplay_table_create = ("""
-""")
+songplay_table_create = """
+    CREATE TABLE IF NOT EXISTS artists (
+        artist_id          VARCHAR PRIMARY KEY, 
+        artist_name        VARCHAR, 
+        artist_location    VARCHAR, 
+        latitude           NUMERIC, 
+        longitude          NUMERIC
+    );
+"""
 
 user_table_create = ("""
 """)
