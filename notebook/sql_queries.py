@@ -43,8 +43,16 @@ time_table_create = """
     );
 """
 
-artist_table_create = ("""
-""")
+user_table_create = """
+    CREATE TABLE IF NOT EXISTS users (
+        user_id           VARCHAR PRIMARY KEY, 
+        first_name        VARCHAR, 
+        last_name         VARCHAR, 
+        gender            VARCHAR, 
+        user_location     VARCHAR,
+        level             VARCHAR
+    );
+"""
 
 time_table_create = ("""
 """)
