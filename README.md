@@ -11,3 +11,6 @@ and SQL. But before writting the ETL pipeline, I'm going to define fact and
 dimension tables for a star schema. Then I'm going to build an entity relationship
 diagram that represents my data model.
 
+## Data Model
+
+![data model](./images/sparkifydb.png)
