@@ -67,7 +67,7 @@ songplay_table_create = """
 );
 """
 
-# INSERT RECORDS
+############################# INSERT RECORDS ###################################
 
 songplay_table_insert = ("""
 """)
@@ -90,7 +90,7 @@ time_table_insert = ("""
 song_select = ("""
 """)
 
-# QUERY LISTS
+#----------------------------------------- QUERY LISTS ---------------------------------------------------------------------
 
 create_table_queries = [artist_table_create, song_table_create, time_table_create, user_table_create, songplay_table_create]
 drop_table_queries = [songplay_table_drop, user_table_drop, time_table_drop, song_table_drop, artist_table_drop]
