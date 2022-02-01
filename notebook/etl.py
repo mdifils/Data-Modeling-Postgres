@@ -106,7 +106,7 @@ def process_data(cur, conn, filepath, func):
     for i, datafile in enumerate(all_files, 1):
         func(cur, datafile)
         conn.commit()
-        print('{i}/{num_files} files processed')
+        print(f'{i}/{num_files} files processed')
 
 
 def main():
