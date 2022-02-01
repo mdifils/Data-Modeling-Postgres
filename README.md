@@ -42,3 +42,6 @@ about what song was listened, the location of the user and the session ID.
 
 ## Project structure
 
+Here is the project files structure.
+
+![Project structure](images/project_structure.png)
