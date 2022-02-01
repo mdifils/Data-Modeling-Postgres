@@ -20,9 +20,9 @@ artist_table_create = """
 
 song_table_create = """
     CREATE TABLE IF NOT EXISTS songs (
-        song_id            VARCHAR PRIMARY KEY, 
-        title              VARCHAR, 
-        artist_id          VARCHAR, 
+        song_id            VARCHAR PRIMARY KEY,
+        artist_id          VARCHAR,
+        title              VARCHAR,  
         duration           NUMERIC,
         year               INT
     -- 	CONSTRAINT fk_songs_artists FOREIGN KEY (artist_id)
