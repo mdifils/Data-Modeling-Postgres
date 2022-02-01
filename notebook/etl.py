@@ -33,6 +33,9 @@ def process_log_file(cur, filepath):
     """
     # open log file
     df = pd.read_json(filepath, lines=True)
+    df.rename(columns={'firstName':'first_name','lastName':'last_name',
+                       'itemInSession':'item_in_session','sessionId':'session_id',
+                       'userId':'user_id','location':'user_location','userAgent':'user_agent'}, inplace=True)
 
     # filter by NextSong action
     df = df[df['page']=='NextSong']
@@ -53,8 +56,8 @@ def process_log_file(cur, filepath):
         cur.execute(time_table_insert, list(row))
 
     # load user table
-    user_df = df[['user_id','first_name','last_name','gender','user_location','level']]
-    user_df = user_df.drop_duplicates()
+    user_df = df[['user_id','first_name','last_name','gender','level']]
+    # user_df = user_df.drop_duplicates()
 
     # insert user records
     for i, row in user_df.iterrows():
@@ -64,16 +67,20 @@ def process_log_file(cur, filepath):
     for index, row in df.iterrows():
         
         # get songid and artistid from song and artist tables
-        cur.execute(song_select, (row.song, row.artist, row.length))
+        # As there are no song_id and no artist_id in the log data
+        # let's check if there are song_id and artist_id in song data
+        # that match the log data
+        cur.execute(song_select, (row.song, row.artist,row.length))
         results = cur.fetchone()
         
         if results:
+            # 
             song_id, artist_id = results
         else:
             song_id, artist_id = None, None
 
         # insert songplay record
-        songplay_data = (row.user_id,song_id,artist_id,row.ts,row.item_in_session,row.session_id)
+        songplay_data = (row.user_id,song_id,artist_id,row.ts,row.session_id,row.user_location,row.user_agent)
         cur.execute(songplay_table_insert, songplay_data)
 
 
@@ -93,13 +100,13 @@ def process_data(cur, conn, filepath, func):
 
     # get total number of files found
     num_files = len(all_files)
-    print('{} files found in {}'.format(num_files, filepath))
+    print(f'{num_files} files found in {filepath}')
 
-    # iterate over files and process
+    # iterate over files and process, making index to start from 1 instead of 0
     for i, datafile in enumerate(all_files, 1):
         func(cur, datafile)
         conn.commit()
-        print('{}/{} files processed.'.format(i, num_files))
+        print('{i}/{num_files} files processed')
 
 
 def main():
@@ -108,15 +115,19 @@ def main():
     - Process all the dataset
     - Inserting data into all tables
     """
-    conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
+    # connecting to sparkifydb database
+    conn = psycopg2.connect("host=pgdb dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
     
     print('\nProcessing song data\n')
+    # processing song data and inserting into songs and artists tables
     process_data(cur, conn, filepath='data/song_data', func=process_song_file)
     
     print('\nProcessing log data\n')
+    # processing log data and inserting into time, users and songplays tables
     process_data(cur, conn, filepath='data/log_data', func=process_log_file)
-
+    
+    # closing the connection to sparkifydb database
     conn.close()
 
 

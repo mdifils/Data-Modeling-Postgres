@@ -11,7 +11,7 @@ artist_table_drop   = "DROP TABLE IF EXISTS artists;"
 artist_table_create = """
     CREATE TABLE IF NOT EXISTS artists (
         artist_id          VARCHAR PRIMARY KEY, 
-        artist_name        VARCHAR, 
+        artist_name        VARCHAR NOT NULL, 
         artist_location    VARCHAR, 
         latitude           NUMERIC, 
         longitude          NUMERIC
@@ -22,24 +22,21 @@ song_table_create = """
     CREATE TABLE IF NOT EXISTS songs (
         song_id            VARCHAR PRIMARY KEY,
         artist_id          VARCHAR,
-        title              VARCHAR,  
+        title              VARCHAR NOT NULL,  
         duration           NUMERIC,
         year               INT
-    -- 	CONSTRAINT fk_songs_artists FOREIGN KEY (artist_id)
-    -- 	REFERENCES artists (artist_id)
-    -- 	ON DELETE CASCADE
     );
 """
 
 time_table_create = """
     CREATE TABLE IF NOT EXISTS time (
         start_time  TIMESTAMP PRIMARY KEY, 
-        hour        INT, 
-        day         INT, 
-        week        INT, 
-        month       INT, 
-        year        INT, 
-        weekday     INT
+        hour        INT NOT NULL, 
+        day         INT NOT NULL, 
+        week        INT NOT NULL, 
+        month       INT NOT NULL, 
+        year        INT NOT NULL, 
+        weekday     INT NOT NULL
     );
 """
 
@@ -49,7 +46,6 @@ user_table_create = """
         first_name        VARCHAR, 
         last_name         VARCHAR, 
         gender            VARCHAR, 
-        user_location     VARCHAR,
         level             VARCHAR
     );
 """
@@ -57,24 +53,26 @@ user_table_create = """
 songplay_table_create = """
     CREATE TABLE IF NOT EXISTS songplays (
         songplay_id       SERIAL PRIMARY KEY,  
-        user_id           VARCHAR REFERENCES users,  
+        user_id           VARCHAR NOT NULL REFERENCES users,  
         song_id           VARCHAR REFERENCES songs, 
         artist_id         VARCHAR REFERENCES artists, 
         start_time        TIMESTAMP REFERENCES time,
-        item_in_session   NUMERIC,
-        session_id        INT
+        session_id        INT,
+        user_location     VARCHAR,
+        song              VARCHAR
 );
 """
 
 ############################# INSERT RECORDS ###################################
 
 songplay_table_insert = """
-    INSERT INTO songplays (user_id, song_id, artist_id, start_time, item_in_session, session_id)
-    VALUES (%s,%s,%s,%s,%s,%s);
+    INSERT INTO songplays (user_id, song_id, artist_id, start_time, session_id, user_location, song)
+    VALUES (%s,%s,%s,%s,%s,%s,%s);
 """
 
 user_table_insert = """
-    INSERT INTO users (user_id, first_name, last_name, gender, user_location, level) VALUES (%s,%s,%s,%s,%s,%s)
+    INSERT INTO users (user_id, first_name, last_name, gender, level) VALUES (%s,%s,%s,%s,%s)
+    ON CONFLICT DO NOTHING;
 """
 
 song_table_insert = """
@@ -83,11 +81,13 @@ song_table_insert = """
 
 artist_table_insert = """
     INSERT INTO artists (artist_id, artist_name, artist_location, latitude, longitude) VALUES (%s,%s,%s,%s,%s)
+    ON CONFLICT DO NOTHING;
 """
 
 
 time_table_insert = """
     INSERT INTO time (start_time, hour, day, week, month, year, weekday) VALUES (%s,%s,%s,%s,%s,%s,%s)
+    ON CONFLICT DO NOTHING;
 """
 
 #-------------------------------------------FIND SONGS--------------------------------------------------------------------
