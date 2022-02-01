@@ -102,15 +102,25 @@ command on your terminal. Then `cd Data-Modeling-Postgres`
 
 4. Run `docker-compose ps` to check containers are running and are up.
 
-![Build image](images/check_container.png)
+![Check container](images/check_container.png)
 
 5. Run `docker-compose logs jlab` to find jupyter lab link
 
-![Build image](images/check_logs.png)
+![Check logs](images/check_logs.png)
 
 6. Open your browser and connect to jupyter lab
+
+![Jupyterlab](images/jupyterlab.png)
+
 7. Run `docker-compose run jlab python create_tables.py` to create all tables.
+
+![Create tables](images/create_tables.png)
+
 8. Run `docker-compose run jlab python etl.py` to populate all tables.
+
+![Insert tables](images/insert_tables.gif)
+
 9. Go to jupyter lab, open `test.ipynb` file, right clic the `Run` option and 
 clic `Run All cells` to run all the cells of the notebook.
-10. You're done. 
+
+10. Run `docker-compose down` to stop and remove containers. 
