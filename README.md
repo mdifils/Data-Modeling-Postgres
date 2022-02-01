@@ -26,11 +26,19 @@ According to the dataset, there are 4 dimension tables and 1 fact table.
 
 ### Dimension tables
 
-- **artists table**: describes the owner the song (name, location, ...)
-- **songs table**: describes the song (title, duration, year, ...)
-- **users table**: describes who is listening to the song
-- **time table**: describes when the song is being played
+- **artists table**: gives some info about the owner of the song
+- **songs table**: gives some info about the song (title, duration, year, ...)
+- **users table**: gives some info about who is listening to the song
+- **time table**: gives some info about when the song was listened
 
 ### Fact table
 
-- **songplays**: 
+- **songplays**: is connected to the 4 dimension tables and gives some info
+about what song was listened, the location of the user and the session ID.
+
+> In general, a fact table gives some metrics or measurements which are numbers
+> such quantity, length, duration, price, ... But this case, the business need is
+> to understand what songs users are listening to.
+
+## Project structure
+
