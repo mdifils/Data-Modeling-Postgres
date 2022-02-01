@@ -61,7 +61,6 @@ songplay_table_create = """
         song_id           VARCHAR REFERENCES songs, 
         artist_id         VARCHAR REFERENCES artists, 
         start_time        TIMESTAMP REFERENCES time,
-        play_length       NUMERIC,
         item_in_session   NUMERIC,
         session_id        INT
 );
@@ -69,26 +68,40 @@ songplay_table_create = """
 
 ############################# INSERT RECORDS ###################################
 
-songplay_table_insert = ("""
-""")
+songplay_table_insert = """
+    INSERT INTO songplays (user_id, song_id, artist_id, start_time, item_in_session, session_id)
+    VALUES (%s,%s,%s,%s,%s,%s);
+"""
 
-user_table_insert = ("""
-""")
+user_table_insert = """
+    INSERT INTO users (user_id, first_name, last_name, gender, user_location, level) VALUES (%s,%s,%s,%s,%s,%s)
+"""
 
-song_table_insert = ("""
-""")
+song_table_insert = """
+    INSERT INTO songs (song_id, artist_id, title, duration, year) VALUES (%s,%s,%s,%s,%s)
+"""
 
-artist_table_insert = ("""
-""")
+artist_table_insert = """
+    INSERT INTO artists (artist_id, artist_name, artist_location, latitude, longitude) VALUES (%s,%s,%s,%s,%s)
+"""
 
 
-time_table_insert = ("""
-""")
+time_table_insert = """
+    INSERT INTO time (start_time, hour, day, week, month, year, weekday) VALUES (%s,%s,%s,%s,%s,%s,%s)
+"""
 
-# FIND SONGS
+#-------------------------------------------FIND SONGS--------------------------------------------------------------------
 
-song_select = ("""
-""")
+# Finding the song ID and artist ID based on the title, artist name, and duration of a song
+song_select = """
+    SELECT song_id, a.artist_id
+    FROM songs AS s
+    JOIN artists AS a
+    ON s.artist_id = a.artist_id
+    WHERE s.title = %s
+    AND a.artist_name = %s
+    AND s.duration = %s;
+"""
 
 #----------------------------------------- QUERY LISTS ---------------------------------------------------------------------
 

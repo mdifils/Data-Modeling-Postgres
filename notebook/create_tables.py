@@ -64,7 +64,7 @@ def main():
     
     drop_tables(cur, conn)
     create_tables(cur, conn)
-    print('All tables have been created successfully!')
+    print('\nAll tables have been created successfully!\n')
 
     conn.close()
 
