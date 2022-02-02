@@ -135,12 +135,10 @@ services ***jlab*** and ***pgdb*** is handled by docker-compose.
 
 |  Packages/Libraries   |                Usage                                 |
 | :-------------------: | :---------------------------------------------------:|
-|     jupyterlab        | To use notebooks to write python and SQL within the 
-same framework|
+|     jupyterlab        | To use notebooks to write python and SQL within the same framework|
 |    psycopg2-binary    |    python wrapper to connect to postgres             |
 |    ipython-sql        |    To write directly SQL statement on notebook       |
-|    pandas             | To read JSON files into dataframe and process data 
-before load it into tables|
+|    pandas             | To read JSON files into dataframe and process data before load it into tables|
 
 ## Quickstart
 
