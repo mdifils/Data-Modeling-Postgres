@@ -30,6 +30,9 @@ song_table_create = """
 
 time_table_create = """
     CREATE TABLE IF NOT EXISTS time (
+        -- Primary key is always unique and not null
+        -- if start_time is not null so are hour,day,week,month,year,weekday
+        -- because they derive directly from start_time
         start_time  TIMESTAMP PRIMARY KEY, 
         hour        INT NOT NULL, 
         day         INT NOT NULL, 
@@ -42,6 +45,8 @@ time_table_create = """
 
 user_table_create = """
     CREATE TABLE IF NOT EXISTS users (
+        -- I could have converted user_id into integer
+        -- but I kept the original data type 
         user_id           VARCHAR PRIMARY KEY, 
         first_name        VARCHAR, 
         last_name         VARCHAR, 
@@ -59,40 +64,48 @@ songplay_table_create = """
         start_time        TIMESTAMP REFERENCES time,
         session_id        INT,
         user_location     VARCHAR,
-        song              VARCHAR
+        song              VARCHAR NOT NULL -- the song's title is important
 );
 """
 
 ############################# INSERT RECORDS ###################################
 
 songplay_table_insert = """
-    INSERT INTO songplays (user_id, song_id, artist_id, start_time, session_id, user_location, song)
+    INSERT INTO songplays 
+    (user_id, song_id, artist_id, start_time, session_id, user_location, song)
     VALUES (%s,%s,%s,%s,%s,%s,%s);
 """
 
 user_table_insert = """
-    INSERT INTO users (user_id, first_name, last_name, gender, level) VALUES (%s,%s,%s,%s,%s)
-    ON CONFLICT DO NOTHING;
+    INSERT INTO users 
+    (user_id, first_name, last_name, gender, level) VALUES (%s,%s,%s,%s,%s)
+    ON CONFLICT (user_id) DO NOTHING;
 """
 
 song_table_insert = """
-    INSERT INTO songs (song_id, artist_id, title, duration, year) VALUES (%s,%s,%s,%s,%s)
+    INSERT INTO 
+    songs (song_id, artist_id, title, duration, year) VALUES (%s,%s,%s,%s,%s)
 """
 
 artist_table_insert = """
-    INSERT INTO artists (artist_id, artist_name, artist_location, latitude, longitude) VALUES (%s,%s,%s,%s,%s)
-    ON CONFLICT DO NOTHING;
+    INSERT INTO 
+    artists (artist_id, artist_name, artist_location, latitude, longitude) 
+    VALUES (%s,%s,%s,%s,%s)
+    ON CONFLICT (artist_id) DO NOTHING;
 """
 
 
 time_table_insert = """
-    INSERT INTO time (start_time, hour, day, week, month, year, weekday) VALUES (%s,%s,%s,%s,%s,%s,%s)
-    ON CONFLICT DO NOTHING;
+    INSERT INTO 
+    time (start_time, hour, day, week, month, year, weekday) 
+    VALUES (%s,%s,%s,%s,%s,%s,%s)
+    ON CONFLICT (start_time) DO NOTHING;
 """
 
-#-------------------------------------------FIND SONGS--------------------------------------------------------------------
+#-------------------------------------------FIND SONGS--------------------------
 
-# Finding the song ID and artist ID based on the title, artist name, and duration of a song
+# Finding the song ID and artist ID based on the title, artist name, 
+# and duration of a song
 song_select = """
     SELECT song_id, a.artist_id
     FROM songs AS s
@@ -103,7 +116,19 @@ song_select = """
     AND s.duration = %s;
 """
 
-#----------------------------------------- QUERY LISTS ---------------------------------------------------------------------
+#----------------------------------------- QUERY LISTS -------------------------
 
-create_table_queries = [artist_table_create, song_table_create, time_table_create, user_table_create, songplay_table_create]
-drop_table_queries = [songplay_table_drop, user_table_drop, time_table_drop, song_table_drop, artist_table_drop]
+create_table_queries = [
+    artist_table_create,
+    song_table_create,
+    time_table_create,
+    user_table_create,
+    songplay_table_create
+]
+drop_table_queries = [
+    songplay_table_drop,
+    user_table_drop,
+    time_table_drop,
+    song_table_drop,
+    artist_table_drop
+]

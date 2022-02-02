@@ -10,20 +10,23 @@ def create_database():
     
     # connect to default database
     # remember 'pgdb' represents postgres service (postgres_container)
-    conn = psycopg2.connect("host=pgdb dbname=studentdb user=student password=student")
+    conn = psycopg2.connect("host=pgdb dbname=studentdb user=student \
+                            password=student")
     # autocommit avoid using conn.commit after each cur.execute
     conn.set_session(autocommit=True)
     cur = conn.cursor()
     
     # create sparkify database with UTF8 encoding
     cur.execute("DROP DATABASE IF EXISTS sparkifydb")
-    cur.execute("CREATE DATABASE sparkifydb WITH ENCODING 'utf8' TEMPLATE template0")
+    cur.execute("CREATE DATABASE sparkifydb WITH ENCODING 'utf8' TEMPLATE \
+                template0")
 
     # close connection to default database
     conn.close()    
     
     # connect to sparkify database
-    conn = psycopg2.connect("host=pgdb dbname=sparkifydb user=student password=student")
+    conn = psycopg2.connect("host=pgdb dbname=sparkifydb user=student \
+                            password=student")
     cur = conn.cursor()
     
     return cur, conn
