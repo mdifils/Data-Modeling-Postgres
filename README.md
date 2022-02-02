@@ -94,7 +94,7 @@ Here is the project files structure.
 
 ![Project structure](images/project_structure.png)
 
-**Data-Modeling-Postgres** is the working direction where I'll be working in.
+**`Data-Modeling-Postgres`** is the working direction where I'll be working in.
 It contains 2 subfolders, `images` which can be ignored (contains all images used
 for the README.md). The second subfolder `notebook` is the most important because
 it contains all files that are needed for this project:
@@ -121,11 +121,11 @@ it contains all files that are needed for this project:
 
 The following files `Dockerfile`, `docker-compose.yml`, `database.env` and 
 `requirements.txt` are used to set up 2 docker containers. The first container
-is `postgres_container` that will run the posgres service called **pgdb** and 
+is `postgres_container` that will run the posgres service called `pgdb` and 
 the second container is `jupyter_container` that will run jupyter lab service
-called **jlab**. All the scripts will be executed inside `jupyter_container` in
+called `jlab`. All the scripts will be executed inside `jupyter_container` in
 which all the dependencies have been installed. The communication between the 2
-services **jlab** and **pgdb** is handled by docker-compose.
+services ***jlab*** and ***pgdb*** is handled by docker-compose.
 
 #### Dependencies
 
