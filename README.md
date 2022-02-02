@@ -20,6 +20,16 @@ that represents my data model.
 
 ## Data Model
 
+### Why star schema ?
+
+![star schema](images/star_schema.png)
+
+The star schema is best choice in this cas because:  
+- **songplays table**: is the only central table to which all dimension tables
+are linked.
+- **Speed and performance**: Simple and fast queries with less `JOINs`.
+- **Normalization**: dimension tables don't have to be normalized.
+
 ![data model](./images/sparkifydb.png)
 
 According to the dataset, there are 4 dimension tables and 1 fact table.
@@ -37,8 +47,8 @@ According to the dataset, there are 4 dimension tables and 1 fact table.
 about what song was listened, the location of the user and the session ID.
 
 > In general, a fact table gives some metrics or measurements which are numbers
-> such quantity, length, duration, price, ... But this case, the business need is
-> to understand what songs users are listening to.
+> such quantity, length, duration, price, ... But in this case, the business need
+> is to understand what songs users are listening to.
 
 ## Project structure
 
@@ -48,11 +58,11 @@ Here is the project files structure.
 
 **Data-Modeling-Postgres** is the working direction where I'll be working in.
 It contains 2 subfolders, `images` which can be ignored (contains all images used
-for the README.md). The second subfolder `notebook` is most important because it
-contain all files that needed for this project:
+for the README.md). The second subfolder `notebook` is the most important because
+it contains all files that are needed for this project:
 
 - `data`: contains the dataset for this project.
-- `sql_queries.py`: python script that does the following SQL queries: 
+- `sql_queries.py`: python script that contains the following SQL queries: 
     * DROP TABLES statements for all tables
     * CREATE TABLES statements for all tables
     * INSERT statements with placeholders to populate all tables
@@ -79,6 +89,8 @@ called **jlab**. All the scripts will be executed inside `jupyter_container` in
 which all the dependencies have been installed. The communication between the 2
 services **jlab** and **pgdb** is handled by docker-compose.
 
+#### Dependencies
+
 |  Packages/Libraries   |                Usage                                 |
 | :-------------------: | :---------------------------------------------------:|
 |     jupyterlab        | To use notebooks to write python and SQL within the same framework|
@@ -86,7 +98,7 @@ services **jlab** and **pgdb** is handled by docker-compose.
 |    ipython-sql        |    To write directly SQL statement on notebook       |
 |    pandas             | To read JSON files into dataframe and process data before load it into tables|
 
-## How to run the project
+## Quickstart
 
 **Requirement**: docker and docker-compose are already installed.
 
