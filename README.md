@@ -58,8 +58,10 @@ about what song was listened, the location of the user and the session ID.
 
 + Notice that I have replaced `user_agent` column by `song` column.
 ! `song` column will later help to know the most listened songs.
-# This can be done with groupBy clause, Count function and orderBy clause.
+# This can be done with GROUP By clause, Count function and ORDER By clause.
 ```
+
+![Top Songs](images/top_songs.png)
 
 ## ETL pipeline
 
