@@ -53,6 +53,41 @@ about what song was listened, the location of the user and the session ID.
 > such quantity, length, duration, price, ... But in this case, the business need
 > is to understand what songs users are listening to.
 
+*Notice that I have replaced `user_agent` column by `song` column.*
+*`song` column will later help to know the most listened songs.*
+*This can be done with groupBy clause, Count function and orderBy clause.*
+
+## ETL pipeline
+
+In order to build an ETL pipeline, some strategies will be followed:
+
+1. Getting all files from the data folder
+
+The python method `os.walk` is very handy for this job.
+
+![Get All Files](images/get_files.png)
+
+This help me to have two lists of files:
+- `song_files = get_files('data/song_data')`
+- `log_files = get_files('data/log_data')`
+
+2. Process song_files
+
+![Song Files](images/song_file.png)
+
+Each file is a single row to be inserted in `artists table` and `songs table`.
+
+3. Process log_files
+
+![Log Files](images/log_file.png)
+
+Each file is a dataframe (multiple rows). It contains all columns for `users table`.
+The `ts` column will be converted to timestamp format and therefore gives all
+information for `time table`. There are also all columns for `songplays table`
+except `song_id` and `artist_id` columns.  
+To find `song_id` and `artist_id` I'll join `artists table` and `songs table`
+based on `artist_name`, `song`=`title` and `length`=`duration`.
+
 ## Project structure
 
 Here is the project files structure.
