@@ -2,11 +2,11 @@
 
 ## Description
 
-The dataset used in this project has been collected from songs and users activities
-on a streaming music app. The purpose is to analyze data and understand what
-songs users are listening to. Data has been collected in JSON format. Those
-`.json` files are located in different directories and doesn't make it easy to
-perform data analysis:  
+The dataset used in this project has been collected from songs and users 
+activities on a streaming music app. The purpose is to analyze data and 
+understand what songs users are listening to. Data has been collected in JSON 
+format. Those `.json` files are located in different directories and doesn't 
+make it easy to perform data analysis:  
 
 ![dataset structure](./images/dataset_structure.png)
 
@@ -50,8 +50,8 @@ The dataset has been modeled into 4 dimension tables and 1 fact table.
 about what song was listened, the location of the user and the session ID.
 
 > In general, a fact table gives some metrics or measurements which are numbers
-> such quantity, length, duration, price, ... But in this case, the business need
-> is to understand what songs users are listening to.
+> such quantity, length, duration, price, ... But in this case,
+> the business need is to understand what songs users are listening to.
 
 ```diff
 - REMARK FOR THE REVIEWER
@@ -85,10 +85,10 @@ Each file is a single row to be inserted in `artists table` and `songs table`.
 
 ![Log Files](images/log_file.png)
 
-Each file is a dataframe (multiple rows). It contains all columns for `users table`.
-The `ts` column will be converted to timestamp format and therefore gives all
-information for `time table`. There are also all columns for `songplays table`
-except `song_id` and `artist_id` columns.  
+Each file is a dataframe (multiple rows). It contains all columns for 
+`users table`. The `ts` column will be converted to datetime format and 
+therefore gives all information for `time table`. There are also all columns 
+for `songplays table` except `song_id` and `artist_id` columns.  
 To find `song_id` and `artist_id` I'll join `artists table` and `songs table`
 based on `artist_name`, `song`=`title` and `length`=`duration`.
 
@@ -99,9 +99,9 @@ Here is the project files structure.
 ![Project structure](images/project_structure.png)
 
 **`Data-Modeling-Postgres`** is the working direction where I'll be working in.
-It contains 2 subfolders, `images` which can be ignored (contains all images used
-for the README.md). The second subfolder `notebook` is the most important because
-it contains all files that are needed for this project:
+It contains 2 subfolders, `images` which can be ignored (contains all images 
+used for the README.md). The second subfolder `notebook` is the most important 
+because it contains all files that are needed for this project:
 
 - `data`: contains the dataset for this project.
 - `sql_queries.py`: python script that contains the following SQL queries: 
@@ -135,16 +135,19 @@ services ***jlab*** and ***pgdb*** is handled by docker-compose.
 
 |  Packages/Libraries   |                Usage                                 |
 | :-------------------: | :---------------------------------------------------:|
-|     jupyterlab        | To use notebooks to write python and SQL within the same framework|
+|     jupyterlab        | To use notebooks to write python and SQL within the 
+same framework|
 |    psycopg2-binary    |    python wrapper to connect to postgres             |
 |    ipython-sql        |    To write directly SQL statement on notebook       |
-|    pandas             | To read JSON files into dataframe and process data before load it into tables|
+|    pandas             | To read JSON files into dataframe and process data 
+before load it into tables|
 
 ## Quickstart
 
 **Requirement**: docker and docker-compose are already installed.
 
-1. Clone this repository with `git clone https://github.com/mdifils/Data-Modeling-Postgres.git` 
+1. Clone this repository with
+`git clone https://github.com/mdifils/Data-Modeling-Postgres.git` 
 command on your terminal. Then `cd Data-Modeling-Postgres`
 2. Run `docker-compose build --no-cache` to build the image
 
