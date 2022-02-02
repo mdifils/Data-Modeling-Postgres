@@ -73,7 +73,7 @@ The python method `os.walk` is very handy for this job.
 
 ![Get All Files](images/get_files.png)
 
-This help me to have two lists of files:
+This helps me to have two lists of files:
 - `song_files = get_files('data/song_data')`
 - `log_files = get_files('data/log_data')`
 
@@ -81,7 +81,10 @@ This help me to have two lists of files:
 
 ![Song Files](images/song_file.png)
 
-Each file is a single row to be inserted in `artists table` and `songs table`.
+Each file is a single row to be inserted in `artists table` and `songs table`:
+- `artist_id`, `artist_name`, `artist_location`, `artist_latitude` and 
+`artist_longitude` for **artists table**.
+- `song_id`, `title` and `duration` for **songs table**.
 
 3. Process log_files
 
