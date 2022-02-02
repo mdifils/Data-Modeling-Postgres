@@ -24,15 +24,18 @@ that represents my data model.
 
 ![star schema](images/star_schema.png)
 
-The star schema is best choice in this cas because:  
+The star schema is the best choice in this case because:  
 - **songplays table**: is the only central table to which all dimension tables
 are linked.
 - **Speed and performance**: Simple and fast queries with less `JOINs`.
 - **Normalization**: dimension tables don't have to be normalized.
 
+Thanks to pgAdmin version 4, the following Entity Relationship Diagram
+representing `sparkify database` was generated:
+
 ![data model](./images/sparkifydb.png)
 
-According to the dataset, there are 4 dimension tables and 1 fact table.
+The dataset has been modeled into 4 dimension tables and 1 fact table.
 
 ### Dimension tables
 
