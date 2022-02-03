@@ -44,10 +44,8 @@ time_table_create = """
 """
 
 user_table_create = """
-    CREATE TABLE IF NOT EXISTS users (
-        -- I could have converted user_id into integer
-        -- but I kept the original data type 
-        user_id           VARCHAR PRIMARY KEY, 
+    CREATE TABLE IF NOT EXISTS users ( 
+        user_id           INT PRIMARY KEY, 
         first_name        VARCHAR, 
         last_name         VARCHAR, 
         gender            VARCHAR, 
@@ -58,7 +56,7 @@ user_table_create = """
 songplay_table_create = """
     CREATE TABLE IF NOT EXISTS songplays (
         songplay_id       SERIAL PRIMARY KEY,  
-        user_id           VARCHAR NOT NULL REFERENCES users,  
+        user_id           INT NOT NULL REFERENCES users,  
         song_id           VARCHAR REFERENCES songs, 
         artist_id         VARCHAR REFERENCES artists, 
         start_time        TIMESTAMP REFERENCES time,
@@ -79,12 +77,13 @@ songplay_table_insert = """
 user_table_insert = """
     INSERT INTO users 
     (user_id, first_name, last_name, gender, level) VALUES (%s,%s,%s,%s,%s)
-    ON CONFLICT (user_id) DO NOTHING;
+    ON CONFLICT (user_id) DO UPDATE SET level = excluded.level;
 """
 
 song_table_insert = """
     INSERT INTO 
     songs (song_id, artist_id, title, duration, year) VALUES (%s,%s,%s,%s,%s)
+    ON CONFLICT (song_id) DO NOTHING;
 """
 
 artist_table_insert = """
